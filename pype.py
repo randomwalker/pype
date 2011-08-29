@@ -3,8 +3,6 @@ import sys, operator, copy, re, random
 from functools import *
 from itertools import *
 
-from compat import printfn
-
 class Pype:
 	def __init__(self, func, *args, **kwargs):
 		"""the *args and **kwargs will get passed to func"""
@@ -219,7 +217,9 @@ def _writeToFile(values, filename_or_file, delim="\n"):
 		file = open(filename_or_file, 'w')
 		close = lambda: file.close()
 	for val in values:
-		printfn (val, end=delim, file=file)
+		#FIXME: unicode?
+		file.write(str(val))
+		file.write(delim)
 	close()
 
 pWrite = Sink(_writeToFile)
